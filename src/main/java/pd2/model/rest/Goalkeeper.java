@@ -3,6 +3,7 @@ package pd2.model.rest;
 import pd2.model.speletaji.Speletajs;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Comparator;
 
 /**
@@ -108,8 +109,8 @@ public class Goalkeeper {
 
         @Override
         public int compare(Goalkeeper o1, Goalkeeper o2) {
-            BigDecimal vg1 = (o1.getGoals() == 0) ? new BigDecimal(o1.getGames()) : new BigDecimal(o1.getGoals()).divide(new BigDecimal(o1.getGames()));
-            BigDecimal vg2 = (o2.getGoals() == 0) ? new BigDecimal(o2.getGames()) : new BigDecimal(o2.getGoals()).divide(new BigDecimal(o2.getGames()));
+            BigDecimal vg1 = (o1.getGoals() == 0) ? new BigDecimal(o1.getGames()) : new BigDecimal(o1.getGoals()).divide(new BigDecimal(o1.getGames()),2, RoundingMode.HALF_UP);
+            BigDecimal vg2 = (o2.getGoals() == 0) ? new BigDecimal(o2.getGames()) : new BigDecimal(o2.getGoals()).divide(new BigDecimal(o2.getGames()), 2, RoundingMode.HALF_UP);
             return vg2.compareTo(vg1);
 
         }

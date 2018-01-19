@@ -1,4 +1,4 @@
-app.controller('MainController', ['$scope', '$http', 'Table', 'Top', 'Players', 'Judge', 'Goalkeeper', 'Evil', function($scope, $http, Table, Top, Players, Judge, Goalkeeper, Evil, getPlayer) {
+app.controller('MainController', ['$scope', '$http', 'Table', 'Top', 'Players', 'Judge', 'Goalkeeper', 'Evil', 'Place',function($scope, $http, Table, Top, Players, Judge, Goalkeeper, Evil, Place, getPlayer) {
   Table.success(function(data) {
     $scope.table = data;
   });
@@ -16,6 +16,9 @@ app.controller('MainController', ['$scope', '$http', 'Table', 'Top', 'Players', 
   });
   Evil.success(function(data) {
     $scope.evil = data
+  });
+  Place.success(function(data) {
+    $scope.place = data
   });
 
 

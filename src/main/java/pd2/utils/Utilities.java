@@ -56,7 +56,7 @@ public class Utilities {
     }
 
     private static boolean diff(String toDate){
-        return fullTime(toDate).after(fullTime("00:60:00"));
+        return fullTime("00:"+toDate).after(fullTime("00:60:00"));
     }
 
     public static Date fullTime(String time) {

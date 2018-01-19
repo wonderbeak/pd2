@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pd2.model.Event;
 import pd2.model.rest.Goalkeeper;
 import pd2.model.rest.Participant;
+import pd2.model.rest.Place;
 import pd2.model.speletaji.Speletajs;
 import pd2.model.t.T;
 import pd2.services.*;
@@ -62,6 +63,11 @@ public class Controller {
     @RequestMapping(value="/table", method = RequestMethod.GET, headers = "Accept=application/json")
     public HttpEntity<List<Participant>> table() {
         return new HttpEntity<List<Participant>>(tableService.getTable());
+    }
+
+    @RequestMapping(value="/places", method = RequestMethod.GET, headers = "Accept=application/json")
+    public HttpEntity<List<Place>> place() {
+        return new HttpEntity<List<Place>>(eventService.getPlaces());
     }
 
     @RequestMapping(value="/player/{id}", method = RequestMethod.GET, headers = "Accept=application/json")

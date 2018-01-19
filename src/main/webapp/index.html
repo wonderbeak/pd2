@@ -27,9 +27,14 @@
 <script src="view/services/judges.service.js"></script>
 <script src="view/services/goalkeepers.service.js"></script>
 <script src="view/services/evil.service.js"></script>
+<script src="view/services/place.service.js"></script>
 
 <!-- Directives -->
 <div ng-controller="MainController as main">
+
+    <div class="progress">
+        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
 <div>
     <h1>Championship</h1>
     <table class="table table-inverse">
@@ -58,6 +63,24 @@
 <div class="progress">
     <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
+    <div>
+        <h1>Places</h1>
+        <table class="table table-inverse">
+            <tr>
+                <th>Name</th>
+                <th>Croud</th>
+                <th>Games</th>
+            </tr>
+            <tr ng-repeat="x in place">
+                <td>{{ x.name }}</td>
+                <td>{{ x.croud }}</td>
+                <td>{{ x.games }}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="progress">
+        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
 <div>
     <h1>TOP players</h1>
     <table class="table table-inverse">
@@ -162,7 +185,7 @@
             <option ng-repeat="x in players">{{ x }}</option>
         </select>
     </div>
-    <label ng-if="typeof(selected !== undefined)">{{ getPlayer(selected) }}</label>
+    <label ng-if="typeof(selected !== undefined)">{{ selected }}</label>
 
     <div class="progress">
         <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
@@ -183,6 +206,10 @@
                 <td>{{ x.sodi }}</td>
             </tr>
         </table>
+    </div>
+
+    <div class="progress">
+        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
 </div>
 
