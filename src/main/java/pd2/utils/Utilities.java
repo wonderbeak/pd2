@@ -50,12 +50,17 @@ public class Utilities {
         return list;
     }
 
+    public static List<Speletajs> evil(List<Speletajs> list) {
+        list.sort(Speletajs.EvilComparator);
+        return list;
+    }
+
     private static boolean diff(String toDate){
-        return fullTime(toDate).after(fullTime("60:00"));
+        return fullTime(toDate).after(fullTime("00:60:00"));
     }
 
     public static Date fullTime(String time) {
-        SimpleDateFormat df = new SimpleDateFormat("mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
         Date fullTime = null;
         try {
             fullTime = df.parse(time);
@@ -63,6 +68,54 @@ public class Utilities {
             e.printStackTrace();
         }
         return fullTime;
+    }
+
+    public static long sum(String one, String two) {
+        long tm = 0;
+
+        String[] arr = one.split(":");
+        tm += Integer.parseInt(arr[2]);
+        tm += 60 * Integer.parseInt(arr[1]);
+        tm += 3600 * Integer.parseInt(arr[0]);
+
+
+        String[] arr2 = two.split(":");
+        tm += Integer.parseInt(arr2[2]);
+        tm += 60 * Integer.parseInt(arr2[1]);
+        tm += 3600 * Integer.parseInt(arr2[0]);
+
+        return tm;
+
+/*        long hh = tm / 3600;
+        tm %= 3600;
+        long mm = tm / 60;
+        tm %= 60;
+        long ss = tm;*/
+    }
+
+    public static long sum(String one) {
+        long tm = 0;
+
+        String[] arr = one.split(":");
+        tm += Integer.parseInt(arr[2]);
+        tm += 60 * Integer.parseInt(arr[1]);
+        tm += 3600 * Integer.parseInt(arr[0]);
+
+        return tm;
+    }
+
+    public static String total(long tm) {
+        long hh = tm / 3600;
+        tm %= 3600;
+        long mm = tm / 60;
+        tm %= 60;
+        long ss = tm;
+        return format(hh) + ":" + format(mm) + ":" + format(ss);
+    }
+
+    private static String format(long s){
+        if (s < 10) return "0" + s;
+        else return "" + s;
     }
 
     public static List<Participant> calculate(Spele spele, List<Participant> participants) {

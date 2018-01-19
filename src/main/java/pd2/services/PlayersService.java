@@ -72,7 +72,7 @@ public class PlayersService {
                                 speletajs.setYellow(1);
                             else {
                                 speletajs.setRed(1);
-                                speletajs.setTotal(Utilities.fullTime(sods.getLaiks()).getTime());
+                                speletajs.setTotal(Utilities.sum(Utilities.total(speletajs.getTotal()),"00:" + sods.getLaiks()));
                             }
                         }
                     }
@@ -81,15 +81,15 @@ public class PlayersService {
                     for (Maina maina : komanda.getMainas().getMaina()) {
                         if (speletajs.getNr() == maina.getNr1()) {
                             speletajs.setMainas(1);
-                            speletajs.setTotal(Utilities.fullTime(maina.getLaiks()).getTime());
+                            speletajs.setTotal(Utilities.sum(Utilities.total(speletajs.getTotal()),"00:" + maina.getLaiks()));
 
                         } else if (speletajs.getNr() == maina.getNr2()) {
                             speletajs.setMainas(1);
-                            speletajs.setTotal(Utilities.fullTime(maina.getLaiks()).getTime());
+                            speletajs.setTotal(Utilities.sum(Utilities.total(speletajs.getTotal()),"00:" + maina.getLaiks()));
                         }
                     }
                 } else {
-                    speletajs.setTotal(Utilities.fullTime("60:00").getTime());
+                    speletajs.setTotal(Utilities.sum(Utilities.total(speletajs.getTotal()),"00:60:00"));
                 }
 
                 if (komanda.getVarti() != null)
@@ -102,7 +102,6 @@ public class PlayersService {
                     }
                 database.collection("Players").document(speletajs.getKomanda() + " " + speletajs.getNr()).set(speletajs);
                 if (speletajs.getLoma().equals("V")) {
-                    System.out.println("WE ARE HERE");
                     for (Komanda win : spele.getKomanda()) {
                         if (win.getNosaukums() != speletajs.getKomanda()) goalkeeperService.saveGoalkeeper(speletajs, win);
                     }
@@ -111,7 +110,7 @@ public class PlayersService {
         }
     }
 
-    public List<Speletajs> getSpeletaji() {
+    public List<Speletajs> getTop() {
         List<Speletajs> players = new ArrayList<>();
         ApiFuture<QuerySnapshot> future =
                 database.collection("Players").get();
@@ -124,11 +123,11 @@ public class PlayersService {
             e.printStackTrace();
         }
         for (DocumentSnapshot document : documents) {
-            players.add(document.toObject(Speletajs.class));
+            if (document.toObject(Speletajs.class).getP() > 0 || document.toObject(Speletajs.class).getVg() > 0) players.add(document.toObject(Speletajs.class));
         }
         // sort with comparator
         Utilities.top(players);
-        return players.subList(0,10);
+        return (players.size() < 10) ? players : players.subList(0,10);
     }
 
     public List<String> getPlayers() {
@@ -147,6 +146,26 @@ public class PlayersService {
             players.add(document.getId());
         }
         // sort with comparator
+        return players;
+    }
+
+    public List<Speletajs> getEvil() {
+        List<Speletajs> players = new ArrayList<>();
+        ApiFuture<QuerySnapshot> future =
+                database.collection("Players").get();
+        List<DocumentSnapshot> documents = null;
+        try {
+            documents = future.get().getDocuments();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        for (DocumentSnapshot document : documents) {
+            if (document.toObject(Speletajs.class).getSodi() > 0) players.add(document.toObject(Speletajs.class));
+        }
+        // sort with comparator
+        Utilities.evil(players);
         return players;
     }
 }

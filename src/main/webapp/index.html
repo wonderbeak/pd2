@@ -26,10 +26,12 @@
 <script src="view/services/players.service.js"></script>
 <script src="view/services/judges.service.js"></script>
 <script src="view/services/goalkeepers.service.js"></script>
+<script src="view/services/evil.service.js"></script>
 
 <!-- Directives -->
 <div ng-controller="MainController as main">
 <div>
+    <h1>Championship</h1>
     <table class="table table-inverse">
         <tr>
             <th>Name</th>
@@ -57,6 +59,7 @@
     <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 <div>
+    <h1>TOP players</h1>
     <table class="table table-inverse">
         <tr>
             <th>Komanda</th>
@@ -92,6 +95,44 @@
         <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
     <div>
+        <h1>Evil players</h1>
+        <table class="table table-inverse">
+            <tr>
+                <th>Komanda</th>
+                <th>Nr</th>
+                <th>Vards</th>
+                <th>Loma</th>
+                <th>Sodi</th>
+                <th>Yellow</th>
+                <th>Red</th>
+                <th>Mainas</th>
+                <th>VG</th>
+                <th>P</th>
+                <th>Pamatsastavs</th>
+                <th>Total</th>
+            </tr>
+            <tr ng-repeat="x in evil">
+                <td>{{ x.komanda }}</td>
+                <td>{{ x.Nr }}</td>
+                <td>{{ x.Vards + " " + x.Uzvards }}</td>
+                <td>{{ x.Loma }}</td>
+                <td>{{ x.sodi }}</td>
+                <td>{{ x.yellow }}</td>
+                <td>{{ x.red }}</td>
+                <td>{{ x.mainas }}</td>
+                <td>{{ x.vg }}</td>
+                <td>{{ x.p }}</td>
+                <td>{{ x.pamatsastavs }}</td>
+                <td>{{ x.total }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="progress">
+        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <div>
+        <h1>Goalkeepers</h1>
         <table class="table table-inverse">
             <tr>
                 <th>Komanda</th>
@@ -107,13 +148,14 @@
                 <td>{{ x.vards + " " + x.uzvards }}</td>
                 <td>{{ x.games }}</td>
                 <td>{{ x.goals }}</td>
-                <td>{{ x.average }}</td>
+                <td>{{ (x.goals / x.games) | number:1 }}</td>
             </tr>
         </table>
     </div>
 <div class="progress">
     <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
+    <h1>Player Select</h1>
     <div class="form-group">
         <label for="exampleSelect1">Example select</label>
         <select class="form-control" id="exampleSelect1" ng-model="selected">
@@ -126,6 +168,7 @@
         <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
     <div>
+        <h1>Evil Judges</h1>
         <table class="table table-inverse">
             <tr>
                 <th>Vards</th>

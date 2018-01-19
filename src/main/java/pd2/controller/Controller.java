@@ -36,7 +36,12 @@ public class Controller {
     }
     @RequestMapping(value="/top", method = RequestMethod.GET, headers = "Accept=application/json")
     public HttpEntity<List<Speletajs>> top() {
-        return new HttpEntity<List<Speletajs>>(playersService.getSpeletaji());
+        return new HttpEntity<List<Speletajs>>(playersService.getTop());
+    }
+
+    @RequestMapping(value="/evil", method = RequestMethod.GET, headers = "Accept=application/json")
+    public HttpEntity<List<Speletajs>> evil() {
+        return new HttpEntity<List<Speletajs>>(playersService.getEvil());
     }
 
     @RequestMapping(value="/players", method = RequestMethod.GET, headers = "Accept=application/json")

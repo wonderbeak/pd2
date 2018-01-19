@@ -174,6 +174,16 @@ public class Speletajs implements Serializable, Comparator<Speletajs> {
         }
     };
 
+    public static Comparator<Speletajs> EvilComparator = new Comparator<Speletajs>() {
+
+        @Override
+        public int compare(Speletajs o1, Speletajs o2) {
+            Integer vg1 = o1.getSodi();
+            Integer vg2 = o2.getSodi();
+            return vg2.compareTo(vg1);
+        }
+    };
+
     @Override
     public int compare(Speletajs o1, Speletajs o2) {
         Integer vg1 = o1.getVg();
